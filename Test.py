@@ -20,9 +20,10 @@ db.add_student("Yuriy", 21, 0)
 db.add_group("kv41", "fam", "spscs")
 db.print_groups()
 db.print_students()
-db.add_student("", 19, 1)
+db.add_student("Innokentiy", 19, 1)
 
-db.del_student(2)
+#db.del_student(1)
+#db.del_group(0)
 db.print_groups()
 db.print_students()
 

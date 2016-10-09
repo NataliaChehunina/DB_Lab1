@@ -114,4 +114,13 @@ class database:
         #self.groups[self.groups.index(self.find_group(el.group, "name"))].studid.remove(id)
         self.students.remove(el)
 
+    def del_group(self, id):
+        el = self.find_group(id)
+        stud = list(el.studid)
+        for i in stud:
+            self.del_student(i)
+        self.groups.remove(el)
 
+    def find_youngest(self):
+        #TODO:make task function.
+        return

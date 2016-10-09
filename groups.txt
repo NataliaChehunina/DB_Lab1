@@ -22,8 +22,9 @@ p9
 sS'studid'
 p10
 (lp11
-I1
-aI3
+I0
+aI1
+aI2
 asba(iDatabase
 group
 p12
@@ -39,5 +40,5 @@ S'kv41'
 p14
 sg10
 (lp15
-I4
+I3
 asba.
