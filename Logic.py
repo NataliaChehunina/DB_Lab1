@@ -128,16 +128,14 @@ class database:
             elif field == "age":
                 el.age = value
             elif field == "group":
-                st = self.find_student(id)
-                gr = self.find_group(st.group, "name")
-                if gr is None:
+                gr = self.find_group(el.group, "name")
+                new_gr = self.find_group(value)
+                if gr is None or new_gr is None:
                     print "Wrong group id!"
                     return
-                else:
-                    gr.studid.remove(id)
-                gr = self.find_group(value)
-                el.group = gr.name
-                gr.studid.append(id)
+                gr.studid.remove(id)
+                el.group = new_gr.name
+                new_gr.studid.append(id)
             else:
                 print "wrong field"
 

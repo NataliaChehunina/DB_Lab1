@@ -22,7 +22,8 @@ p9
 sS'studid'
 p10
 (lp11
-I8
+I7
+aI8
 aI9
 aI10
 asba(iDatabase
@@ -44,5 +45,4 @@ I0
 aI1
 aI2
 aI3
-aI7
 asba.
