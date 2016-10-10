@@ -132,6 +132,7 @@ class database:
                 gr = self.find_group(st.group, "name")
                 if gr is None:
                     print "Wrong group id!"
+                    return
                 else:
                     gr.studid.remove(id)
                 gr = self.find_group(value)
