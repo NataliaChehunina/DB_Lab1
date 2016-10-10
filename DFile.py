@@ -27,6 +27,5 @@ class dumper:
         file.close()
 
     def clean_file(self, fname):
-        #TODO:Write a file cleaner
         file = open(fname, 'wb')
         file.close()

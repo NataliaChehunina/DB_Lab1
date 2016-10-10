@@ -25,9 +25,6 @@ class database:
             self.fgroups = fgroups
             self.fstudents = fstudents
             self.groups = dumper.load_from_file(fgroups)
-            # print self.groups[0]
-            # print self.groups[1]
-            # print self.groups[2]
             group.counter = self.groups.pop(0)
             self.students = dumper.load_from_file(fstudents)
             student.counter = self.students.pop(0)
@@ -48,11 +45,13 @@ class database:
 
     def print_groups(self):
         print "GROUPS : "
-        printlist(self.groups)
+        for elem in self.groups:
+            elem.print_group()
 
     def print_students(self):
         print "STUDENTS : "
-        printlist(self.students)
+        for elem in self.students:
+            elem.print_student()
 
     def add_group(self, name, faculty, department):
         self.groups.append(group(name, faculty, department))
@@ -105,13 +104,11 @@ class database:
         else:
             stud = Database.student(fullname, age, buff_group.name)
             self.students.append(stud)
-            #buff_group.studid.append(stud.id)
             self.groups[self.groups.index(buff_group)].studid.append(stud.id)
 
     def del_student(self, id):
         el = self.find_student(id)
         self.find_group(el.group, "name").studid.remove(id)
-        #self.groups[self.groups.index(self.find_group(el.group, "name"))].studid.remove(id)
         self.students.remove(el)
 
     def del_group(self, id):
@@ -121,6 +118,50 @@ class database:
             self.del_student(i)
         self.groups.remove(el)
 
-    def find_youngest(self):
-        #TODO:make task function.
+    def modify_student(self, id, field, value):
+        el = self.find_student(id)
+        if el is None:
+            print "Wrong id"
+        else:
+            if field == "fullname":
+                el.fullname = value
+            elif field == "age":
+                el.age = value
+            elif field == "group":
+                st = self.find_student(id)
+                gr = self.find_group(st.group, "name")
+                if gr is None:
+                    print "Wrong group id!"
+                else:
+                    gr.studid.remove(id)
+                gr = self.find_group(value)
+                el.group = gr.name
+                gr.studid.append(id)
+            else:
+                print "wrong field"
+
+    def modify_group(self, id, field, value):
+        el = self.find_group(id)
+        if el is None:
+            print "Wrong id"
+        else:
+            if field == "name":
+                el.name = value;
+            elif field == "faculty":
+                el.faculty = value
+            elif field == "department":
+                el.department = value
+            else:
+                print "wrong field"
         return
+
+    def find_youngest(self):
+        res = []
+        for group in self.groups:
+            youngest = self.find_student(group.studid[0])
+            for id in group.studid:
+                stud = self.find_student(id)
+                if stud.age < youngest.age:
+                    youngest = stud
+            res.append(youngest)
+        return res
